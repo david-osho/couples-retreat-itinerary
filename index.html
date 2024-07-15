@@ -31,7 +31,7 @@
             }
 
         .container {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95); /* Increased opacity for better readability */
             padding: 30px;
             margin: 30px auto;
             border-radius: 15px;
@@ -63,6 +63,9 @@
 
         .itinerary {
             margin: 40px 0;
+            background: rgba(255, 255, 255, 0.95); /* Solid background for itinerary */
+            padding: 20px;
+            border-radius: 10px;
         }
 
         .itinerary-day {
@@ -76,7 +79,42 @@
         .itinerary-item {
             padding: 10px;
             border-bottom: 1px solid #ddd;
+            cursor: pointer;
+            position: relative; /* For positioning the icon */
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* Align items to the start */
         }
+
+            .itinerary-item::before {
+                content: '▼'; /* Arrow icon */
+                font-size: 0.8em;
+                color: #333;
+                margin-right: 10px; /* Space between icon and text */
+                flex-shrink: 0; /* Prevent the icon from shrinking */
+            }
+
+        .itinerary-text {
+            flex-grow: 1; /* Allow the text to take up remaining space */
+        }
+
+        .itinerary-item:hover {
+            background: #e0e0e0;
+        }
+
+        .itinerary-description {
+            display: none;
+            padding: 15px;
+            margin: 10px 20px; /* Added margin for indentation */
+            border: 1px solid #4CAF50; /* Solid green border */
+            border-radius: 5px;
+            background: #f9f9f9; /* Light grey background color */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            color: #333;
+            font-size: 1em; /* Increased font size */
+            font-family: 'Georgia', serif; /* Different font */
+        }
+
 
         .highlight {
             background: #ff0;
@@ -119,93 +157,178 @@
         <h2>The Way We Were... Stronger Together</h2>
         <h3>26/07/24 – 28/07/24</h3>
 
-        <div class="welcome">
-            <p>We are absolutely thrilled that you’ve confirmed your attendance for our Couples’ Retreat, themed "The Way We Were... Stronger Together." We can't wait to spend an incredible weekend with you from Friday, July 26th to Sunday, July 28th at the beautiful Macdonald Botley Park Hotel!</p>
-            <blockquote>
-                "Two are better than one, because they have a good return for their labour: If either of them falls down, one can help the other up." (Ecclesiastes 4:9-10)
-            </blockquote>
-            <p>Here's What’s Happening:</p>
-            <h4>Friday, July 26th: Opening Our Hearts... Building Foundations</h4>
-            <ul>
-                <li>Welcome Reception: Kick off the weekend with a warm welcome and a fun meet-and-greet. Let’s get the good vibes rolling! 🍹</li>
-                <li>Ice-Breaker Activities: Enjoy light-hearted games designed to promote laughter and create an atmosphere of openness and camaraderie.</li>
-            </ul>
-            <h4>Saturday, July 27th: Unravelling Love's Mysteries… Deepening Connection</h4>
-            <ul>
-                <li>Daytime Seminars: Dive into engaging sessions designed to inspire and strengthen your bond. Expect lots of laughs, learning, and connection.</li>
-                <li>Black Tie Dinner: Dress to impress for an elegant night of romance, celebration and tons of laughter. It’s going to be a night to remember! 🎩👗</li>
-            </ul>
-            <h4>Other things to do</h4>
-            <ul>
-                <li>Nature Walk: Absorb the beauty of creation by walking the hotel grounds. This tranquil setting is perfect for peaceful conversation and shared reflection.</li>
-                <li>Spa Retreat: Enjoy a refreshing spa to relax, rejuvenate, and rekindle the spark in your relationship with calming treatments. (Kindly note to book ahead at reception upon arrival)</li>
-            </ul>
-            <h4>Sunday, July 28th: Celebrating Commitment and Love’s Journey</h4>
-            <ul>
-                <li>Reflection & Vow Renewal: Start your day with a serene brunch, followed by a beautiful time of reflection and reaffirmation of your vows. Let's celebrate the love and commitment that has brought you here today. 💍❤️</li>
-            </ul>
-            <p>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Location_dot_red.svg" alt="Location pin" class="location-icon" width="16" height="16">
-                Macdonald Botley Park Hotel, Winchester Road, Botley, Southampton SO32 2UA, United Kingdom
-            </p>
-            <blockquote>
-                "Though one may be overpowered, two can defend themselves. A cord of three strands is not quickly broken." (Ecclesiastes 4:12)
-            </blockquote>
-            <p>This retreat is all about deepening your connection and making lasting memories together. We’re so excited to see you there and share in this special time.</p>
-            <p>Important: Please select your food menu choices for you and your spouse as soon as possible using this link. The deadline for submission is 27th June 2024.</p>
-            <p>Please watch for more information from the Team.</p>
-            <p>
-                With Love,<br>
-                ASLAN LIFE Couples’ Retreat 2024<br>
-                On Behalf of Pastor and Mummy O Efueye
-            </p>
+        <div id="event-snippet" style="text-align: center; font-family: 'Montserrat', sans-serif; margin: 20px 0;">
+            <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 10px;">
+                <h4 style="color: grey; font-weight: 400; margin: 0 5px;">Last Activity: </h4>
+                <p id="last-event" style="color: grey; font-weight: 400; margin: 0;">On your marks!</p>
+            </div>
+            <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 10px;">
+                <h4 style="font-weight: 600; margin: 0 5px;">Current Activity: </h4>
+                <p id="current-event" style="font-weight: bold; font-size: 1.2em; margin: 0;">Get ready....</p>
+            </div>
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <h4 style="color: grey; font-weight: 400; margin: 0 5px;">Next Activity: </h4>
+                <p id="next-event" style="color: grey; font-weight: 400; margin: 0;">Go!</p>
+            </div>
         </div>
 
-        <div class="itinerary">
-            <h2>Itinerary</h2>
-            <div class="itinerary-day">Friday, July 26th</div>
-            <div class="itinerary-item" id="friday-arrival">From 15.00 – Guests Arrival</div>
-            <div class="itinerary-item" id="friday-dinner">19.00 – 20.30 – Dinner</div>
-            <div class="itinerary-item" id="friday-entertainment">20.30 – 23.00 – Karaoke/Movie Night (to be decided)</div>
+        <p>We are absolutely thrilled that you’ve confirmed your attendance for our Couples’ Retreat, themed "The Way We Were... Stronger Together." We can't wait to spend an incredible weekend with you from Friday, July 26th to Sunday, July 28th at the beautiful Macdonald Botley Park Hotel!</p>
+        <blockquote>
+            "Two are better than one, because they have a good return for their labour: If either of them falls down, one can help the other up." (Ecclesiastes 4:9-10)
+        </blockquote>
+        <p>Here's What’s Happening:</p>
+        <h4>Friday, July 26th: Opening Our Hearts... Building Foundations</h4>
+        <ul>
+            <li>Welcome Reception: Kick off the weekend with a warm welcome and a fun meet-and-greet. Let’s get the good vibes rolling! 🍹</li>
+            <li>Ice-Breaker Activities: Enjoy light-hearted games designed to promote laughter and create an atmosphere of openness and camaraderie.</li>
+        </ul>
+        <h4>Saturday, July 27th: Unravelling Love's Mysteries… Deepening Connection</h4>
+        <ul>
+            <li>Daytime Seminars: Dive into engaging sessions designed to inspire and strengthen your bond. Expect lots of laughs, learning, and connection.</li>
+            <li>Black Tie Dinner: Dress to impress for an elegant night of romance, celebration and tons of laughter. It’s going to be a night to remember! 🎩👗</li>
+        </ul>
+        <h4>Other things to do</h4>
+        <ul>
+            <li>Nature Walk: Absorb the beauty of creation by walking the hotel grounds. This tranquil setting is perfect for peaceful conversation and shared reflection.</li>
+            <li>Spa Retreat: Enjoy a refreshing spa to relax, rejuvenate, and rekindle the spark in your relationship with calming treatments. (Kindly note to book ahead at reception upon arrival)</li>
+        </ul>
+        <h4>Sunday, July 28th: Celebrating Commitment and Love’s Journey</h4>
+        <ul>
+            <li>Reflection & Vow Renewal: Start your day with a serene brunch, followed by a beautiful time of reflection and reaffirmation of your vows. Let's celebrate the love and commitment that has brought you here today. 💍❤️</li>
+        </ul>
+        <p>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Location_dot_red.svg" alt="Location pin" class="location-icon" width="16" height="16">
+            Macdonald Botley Park Hotel, Winchester Road, Botley, Southampton SO32 2UA, United Kingdom
+        </p>
+        <blockquote>
+            "Though one may be overpowered, two can defend themselves. A cord of three strands is not quickly broken." (Ecclesiastes 4:12)
+        </blockquote>
+        <p>This retreat is all about deepening your connection and making lasting memories together. We’re so excited to see you there and share in this special time.</p>
+        <p>Important: Please select your food menu choices for you and your spouse as soon as possible using this link. The deadline for submission is 27th June 2024.</p>
+        <p>Please watch for more information from the Team.</p>
+        <p>
+            With Love,<br>
+            ASLAN LIFE Couples’ Retreat 2024<br>
+            On Behalf of Pastor and Mummy O Efueye
+        </p>
+    </div>
 
-            <div class="itinerary-day">Saturday, July 27th</div>
-            <div class="itinerary-item" id="saturday-breakfast">07.30 – 09.30 – Breakfast</div>
-            <div class="itinerary-item" id="saturday-welcome">09.30 – 10.00 – Welcome / Introduction by PO & MO</div>
-            <div class="itinerary-item" id="saturday-panel">10.00 -10.45 – Panel Speeches (15 minutes per couple)</div>
-            <div class="itinerary-item" id="saturday-tea">10.45 – 11.00 – Tea break</div>
-            <div class="itinerary-item" id="saturday-discussion">11.00 – 13.30 – Discussion / Questions for the panel</div>
-            <div class="itinerary-item" id="saturday-lunch">13.30 – 14.30 – Lunch</div>
-            <div class="itinerary-item" id="saturday-personal-time">14.30 – 18.00 – Personal time / use of hotel facilities</div>
-            <div class="itinerary-item" id="saturday-photos">18.00 – 19.00 – Couples’ Portrait Photography</div>
-            <div class="itinerary-item" id="saturday-dinner">19.00 – 22.00 – Black Tie Dinner</div>
-            <div class="itinerary-item" id="saturday-dance">22.00 – 00.00 – Dance! Dance!! Dance!!!</div>
-            <div class="itinerary-item" id="saturday-afterparty">From midnight – After-party hangout</div>
-
-            <div class="itinerary-day">Sunday, July 28th</div>
-            <div class="itinerary-item" id="sunday-breakfast">08.00 – 09.50 – Breakfast</div>
-            <div class="itinerary-item" id="sunday-service">10.00 – 11.00 – Service / communion / renewal of vows</div>
-            <div class="itinerary-item" id="sunday-checkout">11.00 – 11.30 – Checkout</div>
-            <div class="itinerary-item" id="sunday-briefing1">11.30 – 11.45 – Briefing</div>
-            <div class="itinerary-item" id="sunday-breakout1">11.45 – 12.15 – Break out with PO / MO</div>
-            <div class="itinerary-item" id="sunday-breakout2">12.15 – 12.45 – Break out swap</div>
-            <div class="itinerary-item" id="sunday-briefing2">12.45 – 13.00 – Briefing</div>
-            <div class="itinerary-item" id="sunday-lunch">13.00 – 13.45 – Lunch</div>
-            <div class="itinerary-item" id="sunday-matters">13.45 – 16.00 – Matters arising from breakout / Questions</div>
-            <div class="itinerary-item" id="sunday-departure">16.00 – Departure</div>
+    <div class="itinerary" id="today-itinerary">
+        <h2>Itinerary</h2>
+        <div class="itinerary-day">Friday, July 26th</div>
+        <div class="itinerary-item" id="friday-arrival">
+            From 15.00 – Guests Arrival
+            <div class="itinerary-description">Welcome to the retreat! Check-in and get settled into your rooms.</div>
+        </div>
+        <div class="itinerary-item" id="friday-dinner">
+            19.00 – 20.30 – Dinner
+            <div class="itinerary-description">Join us for a delightful dinner to kickstart the weekend.</div>
+        </div>
+        <div class="itinerary-item" id="friday-entertainment">
+            20.30 – 23.00 – Karaoke/Movie Night (to be decided)
+            <div class="itinerary-description">Enjoy a fun-filled evening with karaoke or a relaxing movie night.</div>
         </div>
 
-        <div class="hashtag">
-            <p>Share your moments with us using the hashtag: <strong>#aslanlifecr24</strong></p>
-            <p>Follow us on Instagram: <strong>@aslanlife</strong></p>
+        <div class="itinerary-day">Saturday, July 27th</div>
+        <div class="itinerary-item" id="saturday-breakfast">
+            07.30 – 09.30 – Breakfast
+            <div class="itinerary-description">Start your day with a delicious breakfast.</div>
+        </div>
+        <div class="itinerary-item" id="saturday-welcome">
+            09.30 – 10.00 – Welcome / Introduction by PO & MO
+            <div class="itinerary-description">Opening remarks and introduction to the day's events by PO & MO.</div>
+        </div>
+        <div class="itinerary-item" id="saturday-panel">
+            10.00 -10.45 – Panel Speeches (15 minutes per couple)
+            <div class="itinerary-description">Listen to inspiring speeches from couples on their journey together.</div>
+        </div>
+        <div class="itinerary-item" id="saturday-tea">
+            10.45 – 11.00 – Tea break
+            <div class="itinerary-description">Take a short break and enjoy some refreshments.</div>
+        </div>
+        <div class="itinerary-item" id="saturday-discussion">
+            11.00 – 13.30 – Discussion / Questions for the panel
+            <div class="itinerary-description">Engage in discussions and ask questions to the panel.</div>
+        </div>
+        <div class="itinerary-item" id="saturday-lunch">
+            13.30 – 14.30 – Lunch
+            <div class="itinerary-description">Enjoy a delightful lunch with fellow attendees.</div>
+        </div>
+        <div class="itinerary-item" id="saturday-personal-time">
+            14.30 – 18.00 – PERSONAL TIME / use of hotel facilities
+            <div class="itinerary-description">Free time for couples to relax, explore, or use the hotel facilities.</div>
+        </div>
+        <div class="itinerary-item" id="saturday-photos">
+            18.00 – 19.00 – Couples’ Portrait Photography
+            <div class="itinerary-description">Capture beautiful memories with a professional portrait session. Dress code: Formal.</div>
+        </div>
+        <div class="itinerary-item" id="saturday-dinner">
+            19.00 – 22.00 – Black Tie Dinner
+            <div class="itinerary-description">An elegant black-tie dinner to celebrate love and togetherness. Dress code: Black Tie.</div>
+        </div>
+        <div class="itinerary-item" id="saturday-dance">
+            22.00 – 00.00 – Dance! Dance!! Dance!!!
+            <div class="itinerary-description">Dance the night away with your loved one.</div>
+        </div>
+        <div class="itinerary-item" id="saturday-afterparty">
+            From midnight – After-party hangout
+            <div class="itinerary-description">Continue the celebration with a late-night hangout.</div>
         </div>
 
-        <div class="contact">
-            <h2>Contact Us</h2>
-            <p>If you have any questions or need further information, please don't hesitate to reach out to us:</p>
-            <p>Email: <a href="mailto:enquiries@aslanlife.com">enquiries@aslanlife.com</a></p>
-            <p>Phone: <a href="tel:+1234567890">+123 456 7890</a></p>
-            <p>Follow us on social media for updates and more information.</p>
+        <div class="itinerary-day">Sunday, July 28th</div>
+        <div class="itinerary-item" id="sunday-breakfast">
+            08.00 – 09.50 – Breakfast
+            <div class="itinerary-description">Start your day with a wholesome breakfast.</div>
         </div>
+        <div class="itinerary-item" id="sunday-service">
+            10.00 – 11.00 – Service / communion / renewal of vows
+            <div class="itinerary-description">Join us for a service, communion, and a beautiful vow renewal ceremony.</div>
+        </div>
+        <div class="itinerary-item" id="sunday-checkout">
+            11.00 – 11.30 – Checkout
+            <div class="itinerary-description">Check out of your rooms.</div>
+        </div>
+        <div class="itinerary-item" id="sunday-briefing1">
+            11.30 – 11.45 – Briefing
+            <div class="itinerary-description">Final briefing before the breakout sessions.</div>
+        </div>
+        <div class="itinerary-item" id="sunday-breakout1">
+            11.45 – 12.15 – Break out with PO / MO
+            <div class="itinerary-description">Participate in focused breakout sessions with PO and MO.</div>
+        </div>
+        <div class="itinerary-item" id="sunday-breakout2">
+            12.15 – 12.45 – Break out swap
+            <div class="itinerary-description">Swap breakout groups for a different perspective.</div>
+        </div>
+        <div class="itinerary-item" id="sunday-briefing2">
+            12.45 – 13.00 – Briefing
+            <div class="itinerary-description">Briefing to conclude the breakout sessions.</div>
+        </div>
+        <div class="itinerary-item" id="sunday-lunch">
+            13.00 – 13.45 – Lunch
+            <div class="itinerary-description">Enjoy a final lunch with fellow attendees.</div>
+        </div>
+        <div class="itinerary-item" id="sunday-matters">
+            13.45 – 16.00 – Matters arising from breakout / Questions
+            <div class="itinerary-description">Discuss matters arising from the breakout sessions and ask questions.</div>
+        </div>
+        <div class="itinerary-item" id="sunday-departure">
+            16.00 – Departure
+            <div class="itinerary-description">Farewell and safe travels!</div>
+        </div>
+    </div>
+
+    <div class="hashtag">
+        <p>Share your moments with us using the hashtag: <strong>#aslanlifecr24</strong></p>
+        <p>Follow us on Instagram: <strong>@aslanlife</strong></p>
+    </div>
+
+    <div class="contact">
+        <h2>Contact Us</h2>
+        <p>If you have any questions or need further information, please don't hesitate to reach out to us:</p>
+        <p>Email: <a href="mailto:enquiries@aslanlife.com">enquiries@aslanlife.com</a></p>
+        <p>Phone: <a href="tel:+1234567890">+123 456 7890</a></p>
+        <p>Follow us on social media for updates and more information.</p>
     </div>
 
     <script>
@@ -238,16 +361,46 @@
                 { id: "sunday-departure", day: 28, hour: 16, minute: 0 }
             ];
 
-            events.forEach(event => {
+            let lastEvent = null;
+            let currentEvent = null;
+            let nextEvent = null;
+
+            for (let i = 0; i < events.length; i++) {
+                const event = events[i];
                 const eventTime = new Date(2024, 6, event.day, event.hour, event.minute);
                 if (now >= eventTime && now < new Date(eventTime.getTime() + 1 * 60 * 60 * 1000)) {
-                    document.getElementById(event.id).classList.add('highlight');
+                    currentEvent = event;
+                    lastEvent = events[i - 1] || null;
+                    nextEvent = events[i + 1] || null;
+                    break;
                 }
-            });
+            }
+
+            if (currentEvent) {
+                document.getElementById(currentEvent.id).classList.add('highlight');
+                document.getElementById('current-event').textContent = document.getElementById(currentEvent.id).textContent;
+            }
+            if (lastEvent) {
+                document.getElementById('last-event').textContent = document.getElementById(lastEvent.id).textContent;
+            }
+            if (nextEvent) {
+                document.getElementById('next-event').textContent = document.getElementById(nextEvent.id).textContent;
+            }
         }
 
         highlightCurrentEvent();
         setInterval(highlightCurrentEvent, 60000); // Update every minute
+
+        document.querySelectorAll('.itinerary-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const description = item.querySelector('.itinerary-description');
+                if (description.style.display === 'block') {
+                    description.style.display = 'none';
+                } else {
+                    description.style.display = 'block';
+                }
+            });
+        });
     </script>
 </body>
 </html>
