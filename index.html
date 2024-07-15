@@ -5,25 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ASLAN LIFE Couples’ Retreat 2024</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
         body {
-            font-family: Arial, sans-serif;
-            background-image: url('images/aslancr24event.jpg');
-            background-size: cover;
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            color: #333;
+            font-family: 'Montserrat', sans-serif;
+            background: #f4f4f9;
             margin: 0;
             padding: 0;
-            opacity: 0.5;
-            /*z-index: -1;*/
+            color: #333;
         }
 
+            body::before {
+                content: "";
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-image: url('https://raw.githubusercontent.com/david-osho/couples-retreat-itinerary/main/images/aslancr24event.jpeg');
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: cover;
+                opacity: 0.5;
+                z-index: -1;
+            }
+
         .container {
-            background: rgba(255, 255, 255, 0.8);
-            padding: 20px;
-            margin: 20px;
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            margin: 30px auto;
+            border-radius: 15px;
+            max-width: 800px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         h1, h2, h3 {
@@ -31,8 +44,33 @@
             color: #4CAF50;
         }
 
+        h4 {
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .welcome, .contact {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+            .welcome blockquote, .contact blockquote {
+                background: #e9f5e9;
+                border-left: 5px solid #4CAF50;
+                padding: 10px 20px;
+                margin: 20px 0;
+            }
+
         .itinerary {
-            margin: 20px 0;
+            margin: 40px 0;
+        }
+
+        .itinerary-day {
+            background: #4CAF50;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
         }
 
         .itinerary-item {
@@ -46,7 +84,7 @@
 
         .hashtag {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 30px;
         }
 
             .hashtag p {
@@ -54,9 +92,24 @@
                 font-weight: bold;
             }
 
-        .contact {
-            text-align: center;
-            margin-top: 20px;
+        .contact a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        .contact p {
+            margin: 5px 0;
+        }
+
+        .location-icon {
+            vertical-align: middle;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                margin: 20px;
+            }
         }
     </style>
 </head>
@@ -92,9 +145,8 @@
                 <li>Reflection & Vow Renewal: Start your day with a serene brunch, followed by a beautiful time of reflection and reaffirmation of your vows. Let's celebrate the love and commitment that has brought you here today. 💍❤️</li>
             </ul>
             <p>
-                Location:<br>
-                Macdonald Botley Park Hotel<br>
-                Winchester Road, Botley, Southampton SO32 2UA, United Kingdom
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Location_dot_red.svg" alt="Location pin" class="location-icon" width="16" height="16">
+                Macdonald Botley Park Hotel, Winchester Road, Botley, Southampton SO32 2UA, United Kingdom
             </p>
             <blockquote>
                 "Though one may be overpowered, two can defend themselves. A cord of three strands is not quickly broken." (Ecclesiastes 4:12)
@@ -111,9 +163,12 @@
 
         <div class="itinerary">
             <h2>Itinerary</h2>
+            <div class="itinerary-day">Friday, July 26th</div>
             <div class="itinerary-item" id="friday-arrival">From 15.00 – Guests Arrival</div>
             <div class="itinerary-item" id="friday-dinner">19.00 – 20.30 – Dinner</div>
             <div class="itinerary-item" id="friday-entertainment">20.30 – 23.00 – Karaoke/Movie Night (to be decided)</div>
+
+            <div class="itinerary-day">Saturday, July 27th</div>
             <div class="itinerary-item" id="saturday-breakfast">07.30 – 09.30 – Breakfast</div>
             <div class="itinerary-item" id="saturday-welcome">09.30 – 10.00 – Welcome / Introduction by PO & MO</div>
             <div class="itinerary-item" id="saturday-panel">10.00 -10.45 – Panel Speeches (15 minutes per couple)</div>
@@ -125,6 +180,8 @@
             <div class="itinerary-item" id="saturday-dinner">19.00 – 22.00 – Black Tie Dinner</div>
             <div class="itinerary-item" id="saturday-dance">22.00 – 00.00 – Dance! Dance!! Dance!!!</div>
             <div class="itinerary-item" id="saturday-afterparty">From midnight – After-party hangout</div>
+
+            <div class="itinerary-day">Sunday, July 28th</div>
             <div class="itinerary-item" id="sunday-breakfast">08.00 – 09.50 – Breakfast</div>
             <div class="itinerary-item" id="sunday-service">10.00 – 11.00 – Service / communion / renewal of vows</div>
             <div class="itinerary-item" id="sunday-checkout">11.00 – 11.30 – Checkout</div>
@@ -150,5 +207,47 @@
             <p>Follow us on social media for updates and more information.</p>
         </div>
     </div>
+
+    <script>
+        function highlightCurrentEvent() {
+            const now = new Date();
+            const events = [
+                { id: "friday-arrival", day: 26, hour: 15, minute: 0 },
+                { id: "friday-dinner", day: 26, hour: 19, minute: 0 },
+                { id: "friday-entertainment", day: 26, hour: 20, minute: 30 },
+                { id: "saturday-breakfast", day: 27, hour: 7, minute: 30 },
+                { id: "saturday-welcome", day: 27, hour: 9, minute: 30 },
+                { id: "saturday-panel", day: 27, hour: 10, minute: 0 },
+                { id: "saturday-tea", day: 27, hour: 10, minute: 45 },
+                { id: "saturday-discussion", day: 27, hour: 11, minute: 0 },
+                { id: "saturday-lunch", day: 27, hour: 13, minute: 30 },
+                { id: "saturday-personal-time", day: 27, hour: 14, minute: 30 },
+                { id: "saturday-photos", day: 27, hour: 18, minute: 0 },
+                { id: "saturday-dinner", day: 27, hour: 19, minute: 0 },
+                { id: "saturday-dance", day: 27, hour: 22, minute: 0 },
+                { id: "saturday-afterparty", day: 28, hour: 0, minute: 0 },
+                { id: "sunday-breakfast", day: 28, hour: 8, minute: 0 },
+                { id: "sunday-service", day: 28, hour: 10, minute: 0 },
+                { id: "sunday-checkout", day: 28, hour: 11, minute: 0 },
+                { id: "sunday-briefing1", day: 28, hour: 11, minute: 30 },
+                { id: "sunday-breakout1", day: 28, hour: 11, minute: 45 },
+                { id: "sunday-breakout2", day: 28, hour: 12, minute: 15 },
+                { id: "sunday-briefing2", day: 28, hour: 12, minute: 45 },
+                { id: "sunday-lunch", day: 28, hour: 13, minute: 0 },
+                { id: "sunday-matters", day: 28, hour: 13, minute: 45 },
+                { id: "sunday-departure", day: 28, hour: 16, minute: 0 }
+            ];
+
+            events.forEach(event => {
+                const eventTime = new Date(2024, 6, event.day, event.hour, event.minute);
+                if (now >= eventTime && now < new Date(eventTime.getTime() + 1 * 60 * 60 * 1000)) {
+                    document.getElementById(event.id).classList.add('highlight');
+                }
+            });
+        }
+
+        highlightCurrentEvent();
+        setInterval(highlightCurrentEvent, 60000); // Update every minute
+    </script>
 </body>
 </html>
