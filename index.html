@@ -83,7 +83,7 @@
             position: relative; /* For positioning the icon */
             display: flex;
             align-items: center;
-            justify-content: flex-start; /* Align items to the start */
+            justify-content: space-between; /* Ensure space between text and icon */
         }
 
             .itinerary-item::before {
@@ -105,7 +105,7 @@
         .itinerary-description {
             display: none;
             padding: 15px;
-            margin: 10px 20px; /* Added margin for indentation */
+            margin: 5px 10px; /* Added margin for indentation */
             border: 1px solid #4CAF50; /* Solid green border */
             border-radius: 5px;
             background: #f9f9f9; /* Light grey background color */
@@ -114,6 +114,41 @@
             font-size: 1em; /* Increased font size */
             font-family: 'Georgia', serif; /* Different font */
         }
+
+        .instagram-info {
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #fce4ec; /* Light pink background for fun */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .instagram-logo {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+        }
+
+        .instagram-text {
+            font-size: 1.2em;
+            color: #333;
+        }
+
+            .instagram-text .hashtag {
+                font-size: 1.5em;
+                color: #e91e63; /* Instagram pink */
+            }
+
+            .instagram-text a {
+                color: #4CAF50; /* Match theme color */
+                text-decoration: none;
+            }
+
+                .instagram-text a:hover {
+                    text-decoration: underline;
+                }
 
 
         .highlight {
@@ -174,11 +209,11 @@
             </div>
             <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 10px;">
                 <h4 style="font-weight: 600; margin: 0 5px;">Current Activity: </h4>
-                <p id="current-event" style="font-weight: bold; font-size: 1.2em; margin: 0;">Get ready....</p>
+                <p id="current-event" style="font-weight: bold; font-size: 1.2em; margin: 0;">Get set....</p>
             </div>
             <div style="display: flex; justify-content: center; align-items: center;">
                 <h4 style="color: grey; font-weight: 400; margin: 0 5px;">Next Activity: </h4>
-                <p id="next-event" style="color: grey; font-weight: 400; margin: 0;">Go!</p>
+                <p id="next-event" style="color: grey; font-weight: 400; margin: 0;">Go!!!!!</p>
             </div>
         </div>
 
@@ -217,116 +252,117 @@
             "Though one may be overpowered, two can defend themselves. A cord of three strands is not quickly broken." (Ecclesiastes 4:12)
         </blockquote>
         <p>This retreat is all about deepening your connection and making lasting memories together. We’re so excited to see you there and share in this special time.</p>
-        <p>Important: Please select your food menu choices for you and your spouse as soon as possible using this link. The deadline for submission is 27th June 2024.</p>
-        <p>Please watch for more information from the Team.</p>
-        <p>
-            With Love,<br>
-            ASLAN LIFE Couples’ Retreat 2024<br>
-            On Behalf of Pastor and Mummy O Efueye
-        </p>
+        <div class="instagram-info">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram logo" class="instagram-logo">
+            <div class="instagram-text">
+                <p>Share your moments with us using the hashtag:</p>
+                <p class="hashtag"><strong>#aslanlifecr24</strong></p>
+                <p>Follow us on Instagram: <a href="https://www.instagram.com/aslanlife" target="_blank"><strong>@aslanlife</strong></a></p>
+            </div>
+        </div>
     </div>
 
     <div class="itinerary" id="today-itinerary">
         <h2>Itinerary</h2>
         <div class="itinerary-day">Friday, July 26th</div>
         <div class="itinerary-item" id="friday-arrival">
-            From 15.00 – Guests Arrival
+            <span class="itinerary-text">From 15.00 – Guests Arrival</span>
             <div class="itinerary-description">Welcome to the retreat! Check-in and get settled into your rooms.</div>
         </div>
         <div class="itinerary-item" id="friday-dinner">
-            19.00 – 20.30 – Dinner
+            <span class="itinerary-text">19.00 – 20.30 – Dinner</span>
             <div class="itinerary-description">Join us for a delightful dinner to kickstart the weekend.</div>
         </div>
         <div class="itinerary-item" id="friday-entertainment">
-            20.30 – 23.00 – Karaoke/Movie Night (to be decided)
+            <span class="itinerary-text">20.30 – 23.00 – Karaoke/Movie Night (to be decided)</span>
             <div class="itinerary-description">Enjoy a fun-filled evening with karaoke or a relaxing movie night.</div>
         </div>
 
         <div class="itinerary-day">Saturday, July 27th</div>
         <div class="itinerary-item" id="saturday-breakfast">
-            07.30 – 09.30 – Breakfast
+            <span class="itinerary-text">07.30 – 09.30 – Breakfast</span>
             <div class="itinerary-description">Start your day with a delicious breakfast.</div>
         </div>
         <div class="itinerary-item" id="saturday-welcome">
-            09.30 – 10.00 – Welcome / Introduction by PO & MO
+            <span class="itinerary-text">09.30 – 10.00 – Welcome / Introduction by PO & MO</span>
             <div class="itinerary-description">Opening remarks and introduction to the day's events by PO & MO.</div>
         </div>
         <div class="itinerary-item" id="saturday-panel">
-            10.00 -10.45 – Panel Speeches (15 minutes per couple)
+            <span class="itinerary-text">10.00 -10.45 – Panel Speeches (15 minutes per couple)</span>
             <div class="itinerary-description">Listen to inspiring speeches from couples on their journey together.</div>
         </div>
         <div class="itinerary-item" id="saturday-tea">
-            10.45 – 11.00 – Tea break
+            <span class="itinerary-text">10.45 – 11.00 – Tea break</span>
             <div class="itinerary-description">Take a short break and enjoy some refreshments.</div>
         </div>
         <div class="itinerary-item" id="saturday-discussion">
-            11.00 – 13.30 – Discussion / Questions for the panel
+            <span class="itinerary-text">11.00 – 13.30 – Discussion / Questions for the panel</span>
             <div class="itinerary-description">Engage in discussions and ask questions to the panel.</div>
         </div>
         <div class="itinerary-item" id="saturday-lunch">
-            13.30 – 14.30 – Lunch
+            <span class="itinerary-text">13.30 – 14.30 – Lunch</span>
             <div class="itinerary-description">Enjoy a delightful lunch with fellow attendees.</div>
         </div>
         <div class="itinerary-item" id="saturday-personal-time">
-            14.30 – 18.00 – PERSONAL TIME / use of hotel facilities
+            <span class="itinerary-text">14.30 – 18.00 – PERSONAL TIME / use of hotel facilities</span>
             <div class="itinerary-description">Free time for couples to relax, explore, or use the hotel facilities.</div>
         </div>
         <div class="itinerary-item" id="saturday-photos">
-            18.00 – 19.00 – Couples’ Portrait Photography
+            <span class="itinerary-text">18.00 – 19.00 – Couples’ Portrait Photography</span>
             <div class="itinerary-description">Capture beautiful memories with a professional portrait session. Dress code: Formal.</div>
         </div>
         <div class="itinerary-item" id="saturday-dinner">
-            19.00 – 22.00 – Black Tie Dinner
+            <span class="itinerary-text">19.00 – 22.00 – Black Tie Dinner</span>
             <div class="itinerary-description">An elegant black-tie dinner to celebrate love and togetherness. Dress code: Black Tie.</div>
         </div>
         <div class="itinerary-item" id="saturday-dance">
-            22.00 – 00.00 – Dance! Dance!! Dance!!!
+            <span class="itinerary-text">22.00 – 00.00 – Dance! Dance!! Dance!!!</span>
             <div class="itinerary-description">Dance the night away with your loved one.</div>
         </div>
         <div class="itinerary-item" id="saturday-afterparty">
-            From midnight – After-party hangout
+            <span class="itinerary-text">From midnight – After-party hangout</span>
             <div class="itinerary-description">Continue the celebration with a late-night hangout.</div>
         </div>
 
         <div class="itinerary-day">Sunday, July 28th</div>
         <div class="itinerary-item" id="sunday-breakfast">
-            08.00 – 09.50 – Breakfast
+            <span class="itinerary-text">08.00 – 09.50 – Breakfast</span>
             <div class="itinerary-description">Start your day with a wholesome breakfast.</div>
         </div>
         <div class="itinerary-item" id="sunday-service">
-            10.00 – 11.00 – Service / communion / renewal of vows
+            <span class="itinerary-text">10.00 – 11.00 – Service / communion / renewal of vows</span>
             <div class="itinerary-description">Join us for a service, communion, and a beautiful vow renewal ceremony.</div>
         </div>
         <div class="itinerary-item" id="sunday-checkout">
-            11.00 – 11.30 – Checkout
+            <span class="itinerary-text">11.00 – 11.30 – Checkout</span>
             <div class="itinerary-description">Check out of your rooms.</div>
         </div>
         <div class="itinerary-item" id="sunday-briefing1">
-            11.30 – 11.45 – Briefing
+            <span class="itinerary-text">11.30 – 11.45 – Briefing</span>
             <div class="itinerary-description">Final briefing before the breakout sessions.</div>
         </div>
         <div class="itinerary-item" id="sunday-breakout1">
-            11.45 – 12.15 – Break out with PO / MO
+            <span class="itinerary-text">11.45 – 12.15 – Break out with PO / MO</span>
             <div class="itinerary-description">Participate in focused breakout sessions with PO and MO.</div>
         </div>
         <div class="itinerary-item" id="sunday-breakout2">
-            12.15 – 12.45 – Break out swap
+            <span class="itinerary-text">12.15 – 12.45 – Break out swap</span>
             <div class="itinerary-description">Swap breakout groups for a different perspective.</div>
         </div>
         <div class="itinerary-item" id="sunday-briefing2">
-            12.45 – 13.00 – Briefing
+            <span class="itinerary-text">12.45 – 13.00 – Briefing</span>
             <div class="itinerary-description">Briefing to conclude the breakout sessions.</div>
         </div>
         <div class="itinerary-item" id="sunday-lunch">
-            13.00 – 13.45 – Lunch
+            <span class="itinerary-text">13.00 – 13.45 – Lunch</span>
             <div class="itinerary-description">Enjoy a final lunch with fellow attendees.</div>
         </div>
         <div class="itinerary-item" id="sunday-matters">
-            13.45 – 16.00 – Matters arising from breakout / Questions
+            <span class="itinerary-text">13.45 – 16.00 – Matters arising from breakout / Questions</span>
             <div class="itinerary-description">Discuss matters arising from the breakout sessions and ask questions.</div>
         </div>
         <div class="itinerary-item" id="sunday-departure">
-            16.00 – Departure
+            <span class="itinerary-text">16.00 – Departure</span>
             <div class="itinerary-description">Farewell and safe travels!</div>
         </div>
     </div>
@@ -414,6 +450,7 @@
                 }
             });
         });
+
     </script>
 </body>
 </html>
