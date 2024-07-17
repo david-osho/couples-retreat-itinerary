@@ -576,6 +576,29 @@
                 document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
             });
         });
+
+        function submitFeedback() {
+            const feedbackMessage = document.getElementById('feedback-message').value;
+            if (feedbackMessage) {
+                const googleFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdfm7pj6KBYnGH1Ab9iSCetjlVirdWYQduxJXUPoY8u2jbuVQ/formResponse";
+                const formData = new FormData();
+                formData.append("entry.517687909", feedbackMessage);
+
+                fetch(googleFormUrl, {
+                    method: "POST",
+                    mode: "no-cors",
+                    body: formData
+                }).then(() => {
+                    alert("Thank you for your feedback!");
+                    document.getElementById('feedback-message').value = "";
+                }).catch((error) => {
+                    console.error("Error submitting feedback:", error);
+                });
+            } else {
+                alert("Please enter your feedback or question.");
+            }
+        }
+
     </script>
 </body>
 </html>
