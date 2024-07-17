@@ -231,9 +231,22 @@
             background-color: #4CAF50;
             padding: 10px;
             border-bottom: 2px solid white;
-            position: sticky; /* Change this from fixed to sticky */
+            position: fixed;
+            width: 100%;
             top: 0;
             z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
         }
 
         .nav-menu {
@@ -242,6 +255,7 @@
             padding: 0;
             display: flex;
             justify-content: space-around;
+            flex-wrap: wrap;
         }
 
         .nav-link {
@@ -250,6 +264,7 @@
             font-weight: bold;
             display: flex;
             align-items: center;
+            padding: 10px;
         }
 
             .nav-link i {
@@ -259,6 +274,28 @@
             .nav-link:hover {
                 border-bottom: 2px solid white;
             }
+
+        @media (max-width: 600px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+            }
+
+                .nav-menu.show {
+                    display: flex;
+                }
+
+            .nav-link {
+                padding: 15px 0;
+            }
+        }
+
 
         .feedback-form textarea {
             width: 100%;
@@ -290,11 +327,14 @@
 </head>
 <body>
     <nav class="navbar">
+        <button class="menu-toggle" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
         <ul class="nav-menu">
-            <li><a href="#welcome-message" class="nav-link"><i class="fas fa-home"></i> Welcome Message</a></li>
+            <li><a href="#welcome" class="nav-link"><i class="fas fa-home"></i> Welcome Message</a></li>
             <li><a href="#today-itinerary" class="nav-link"><i class="fas fa-calendar-alt"></i> Your Itinerary</a></li>
-            <li><a href="#feedback-form" class="nav-link"><i class="fas fa-comment"></i> Feedback or Ask an Anonymous Question</a></li>
-            <li><a href="#instagram-share" class="nav-link"><i class="fab fa-instagram"></i> Instagram Share</a></li>
+            <li><a href="#feedback-form" class="nav-link"><i class="fas fa-comment"></i> Feedback or Anonymous Questions</a></li>
+            <li><a href="#instagram-share" class="nav-link"><i class="fab fa-instagram"></i> Instagram post and upload</a></li>
             <li><a href="#contact-us" class="nav-link"><i class="fas fa-envelope"></i> Contact Us</a></li>
         </ul>
     </nav>
@@ -575,6 +615,10 @@
                 event.preventDefault();
                 document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
             });
+        });
+
+        document.querySelector('.menu-toggle').addEventListener('click', function () {
+            document.querySelector('.nav-menu').classList.toggle('show');
         });
 
         function submitFeedback() {
