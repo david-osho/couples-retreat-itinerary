@@ -225,7 +225,7 @@
                     console.log('Fetched feedback:', feedbackList); // Debug log
 
                     // Reverse the feedbackList to show the latest information first
-                    feedbackList.reverse();
+                    //feedbackList.reverse();
 
                     feedbackMessages.innerHTML = feedbackList.map(fb => `
                                     <div class="feedback-message">
@@ -271,7 +271,7 @@
                 slideIndex++;
                 if (slideIndex > slides.length) { slideIndex = 1; }
                 slides[slideIndex - 1].style.display = "block";
-                setTimeout(autoShowSlides, 15000); // Change image every 3 seconds
+                setTimeout(autoShowSlides, 10000); // Change image every 10 seconds
             }
         });
     </script>
