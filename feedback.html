@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .feedback-container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .feedback-message {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+            .feedback-message .text {
+                background-color: #e1f5fe;
+                padding: 10px;
+                border-radius: 15px;
+                position: relative;
+                max-width: 80%;
+            }
+
+                .feedback-message .text::after {
+                    content: "";
+                    position: absolute;
+                    top: 15px;
+                    left: -10px;
+                    border-width: 10px;
+                    border-style: solid;
+                    border-color: transparent #e1f5fe transparent transparent;
+                }
+
+            .feedback-message .timestamp {
+                font-size: 12px;
+                color: #888;
+                position: absolute;
+                bottom: -18px;
+                right: 0;
+            }
+
+            .feedback-message img {
+                max-width: 200px;
+                margin-left: 10px;
+                border-radius: 10px;
+            }
+
+        .slideshow-container {
+            max-width: 500px;
+            position: relative;
+            margin: 20px auto;
+        }
+
+        .mySlides {
+            display: none;
+        }
+
+            .mySlides img {
+                width: 100%;
+                border-radius: 10px;
+            }
+
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+        }
+
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .prev {
+            left: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+            button:hover {
+                background-color: #45a049;
+            }
+
+        textarea {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: vertical;
+        }
+
+        input[type="file"] {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="feedback-container">
+        <form id="feedbackForm">
+            <textarea id="feedback" name="feedback" placeholder="Enter your feedback"></textarea>
+            <input type="file" id="image" name="image" accept="image/*">
+            <button type="submit">Submit</button>
+        </form>
+        <div id="feedbackMessages"></div>
+    </div>
+    <div class="slideshow-container" id="slideshow-container"></div>
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const feedbackForm = document.getElementById('feedbackForm');
+            const feedbackTextarea = document.getElementById('feedback');
+            const imageInput = document.getElementById('image');
+            const feedbackMessages = document.getElementById('feedbackMessages');
+            const slideshowContainer = document.getElementById('slideshow-container');
+
+            const functionUrl = 'https://aslannew.azurewebsites.net/api/FeedbackFunction?code=WzXTRTdNHHzNUv9NriDbnn3PJlhe81NZ7MRyY32g3qWCAzFuTGDNOQ%3D%3D'; // Update this with the correct URL
+
+            feedbackForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                console.log('Form submit event triggered'); // Debug log
+
+                const feedback = feedbackTextarea.value;
+                const imageFile = imageInput.files[0];
+
+                if (imageFile) {
+                    const reader = new FileReader();
+                    reader.onload = async function (event) {
+                        const imageBase64 = event.target.result.split(',')[1];
+                        const mimeType = imageFile.type;  // Get the MIME type of the image
+
+                        console.log('Sending data to server'); // Debug log
+                        try {
+                            const response = await fetch(functionUrl, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({ feedback, image: imageBase64, mimeType })
+                            });
+
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+
+                            const result = await response.json();
+                            console.log('Server response:', result); // Debug log
+
+                            feedbackTextarea.value = '';
+                            imageInput.value = '';
+                            loadFeedback();
+                        } catch (error) {
+                            console.error('Fetch error: ', error); // Debug log
+                        }
+                    };
+                    reader.readAsDataURL(imageFile);
+                } else {
+                    console.error('No image file selected'); // Debug log
+                    try {
+                        const response = await fetch(functionUrl, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ feedback, image: '', mimeType: '' })
+                        });
+
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+
+                        const result = await response.json();
+                        console.log('Server response:', result); // Debug log
+
+                        feedbackTextarea.value = '';
+                        imageInput.value = '';
+                        loadFeedback();
+                    } catch (error) {
+                        console.error('Fetch error: ', error); // Debug log
+                    }
+                }
+            });
+
+            async function loadFeedback() {
+                console.log('Loading feedback from server'); // Debug log
+                try {
+                    const response = await fetch(functionUrl);
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    const feedbackList = await response.json();
+                    console.log('Fetched feedback:', feedbackList); // Debug log
+
+                    // Reverse the feedbackList to show the latest information first
+                    feedbackList.reverse();
+
+                    feedbackMessages.innerHTML = feedbackList.map(fb => `
+                                    <div class="feedback-message">
+                                        <div class="text">${fb.feedback}</div>
+                                        ${fb.imageUrl ? `<img src="${fb.imageUrl}" alt="Feedback Image">` : ''}
+                                        <div class="timestamp">${new Date(fb.timestamp).toLocaleString()}</div>
+                                    </div>`).join('');
+
+                    slideshowContainer.innerHTML = feedbackList.map(fb => fb.imageUrl ? `<div class="mySlides"><img src="${fb.imageUrl}" alt="Feedback Image"></div>` : '').join('');
+                    showSlides(slideIndex);
+                    autoShowSlides();
+                } catch (error) {
+                    console.error('Fetch error: ', error); // Debug log
+                }
+            }
+
+            loadFeedback();
+            setInterval(loadFeedback, 10000); // Polling interval: 10 seconds
+
+            let slideIndex = 0;
+            function plusSlides(n) {
+                showSlides(slideIndex += n);
+            }
+
+            function showSlides(n) {
+                let i;
+                let slides = document.getElementsByClassName("mySlides");
+                if (slides.length === 0) return;
+                if (n >= slides.length) { slideIndex = 0; }
+                if (n < 0) { slideIndex = slides.length - 1; }
+                for (i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";
+                }
+                slides[slideIndex].style.display = "block";
+            }
+
+            function autoShowSlides() {
+                let slides = document.getElementsByClassName("mySlides");
+                if (slides.length === 0) return;
+                for (let i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";
+                }
+                slideIndex++;
+                if (slideIndex > slides.length) { slideIndex = 1; }
+                slides[slideIndex - 1].style.display = "block";
+                setTimeout(autoShowSlides, 15000); // Change image every 3 seconds
+            }
+        });
+    </script>
+</body>
+</html>
