@@ -12,6 +12,34 @@
             padding: 0;
         }
 
+
+        h1, h2, h3 {
+            text-align: center;
+            color: #4CAF50;
+        }
+
+        .feedback-container form {
+            margin-bottom: 20px; /* Add more space below the form */
+        }
+
+        input[type="file"] {
+            display: block;
+            width: 100%;
+            margin: 10px 0; /* Adjust spacing around the file input */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box; /* Ensure padding doesn't increase the element's total width */
+            background-color: #f9f9f9;
+            cursor: pointer;
+        }
+
+        button[type="submit"] {
+            display: block; /* Make the button take the full width of its container */
+            width: 100%;
+            margin-top: 10px; /* Add some space above the submit button */
+        }
+
         .feedback-container {
             max-width: 600px;
             margin: 20px auto;
@@ -116,15 +144,16 @@
 
         textarea {
             width: calc(100% - 22px);
+            height:100px;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            resize: vertical;
+            font-size: 1.2em;
+            resize: none;
         }
 
-        input[type="file"] {
-            margin-top: 10px;
-        }
+        
+
     </style>
 </head>
 <body>
