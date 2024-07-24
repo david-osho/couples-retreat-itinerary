@@ -802,7 +802,7 @@
                     const question = questionPart.replace('Q:', '').trim();
                     const qid = `q${index + 1}`;
                     const questionElem = document.createElement('div');
-                    questionElem.innerHTML = `<p>${question}</p>`;
+                    questionElem.innerHTML = `<p>$Question {index +1}: {question}</p>`;
 
                     if (answers.length === 1 && answers[0].includes('*')) {
                         const correctAnswer = answers[0].replace('*', '').trim();
