@@ -7,34 +7,46 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: black;
+            background-color: #000; /* Black background */
+            color: #fff; /* Optional: White text color for better readability */
             margin: 0;
             padding: 0;
-        }
-
-        h1, h2, h3 {
-            text-align: center;
-            color: #4CAF50;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
 
         .slideshow-container {
-            max-width: 800px;
+            width: 80%; /* 80% of the page width */
+            height: 80%; /* 80% of the page height */
             position: relative;
-            margin: 50px auto;
             background: rgba(255, 255, 255, 0.95);
             padding: 20px;
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .mySlides {
             display: none;
+            width: 100%;
+            height: 100%;
+            transition: opacity 1s ease-in-out; /* Smooth transition */
+            opacity: 0; /* Start with hidden */
         }
 
             .mySlides img {
                 width: 100%;
+                height: 100%;
+                object-fit: cover;
                 border-radius: 10px;
+            }
+
+            .mySlides.show {
+                opacity: 1; /* Show slide */
             }
 
         .prev, .next {
@@ -61,6 +73,7 @@
             left: 0;
             border-radius: 3px 0 0 3px;
         }
+
     </style>
 </head>
 <body>
@@ -132,7 +145,7 @@
                     loadFeedback(); // Reload feedback at the end of the slideshow
                 }
                 slides[slideIndex - 1].style.display = "block";
-                setTimeout(autoShowSlides, 5000); // Change image every 6 seconds
+                setTimeout(autoShowSlides, 7000); // Change image every 6 seconds
             }
 
             loadFeedback();
