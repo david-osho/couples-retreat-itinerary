@@ -718,13 +718,13 @@
 
             if (currentEvent) {
                 document.getElementById(currentEvent.id).classList.add('highlight');
-                document.getElementById('current-event').textContent = document.getElementById(currentEvent.id).textContent;
+                document.getElementById('current-event').textContent = document.getElementById(currentEvent.id).querySelector('.itinerary-text').textContent;
             }
             if (lastEvent) {
-                document.getElementById('last-event').textContent = document.getElementById(lastEvent.id).textContent;
+                document.getElementById('last-event').textContent = document.getElementById(lastEvent.id).querySelector('.itinerary-text').textContent;
             }
             if (nextEvent) {
-                document.getElementById('next-event').textContent = document.getElementById(nextEvent.id).textContent;
+                document.getElementById('next-event').textContent = document.getElementById(nextEvent.id).querySelector('.itinerary-text').textContent;
             }
         }
 
