@@ -88,6 +88,8 @@
             border-radius: 3px 0 0 3px;
         }
 
+
+
     </style>
 </head>
 <body>
@@ -148,11 +150,9 @@
                 for (i = 0; i < slides.length; i++) {
                     slides[i].style.display = "none";
                     slides[i].classList.remove('show');
-
                 }
                 slides[slideIndex].style.display = "block";
-                slides[slideIndex].classList.remove('show');
-
+                slides[slideIndex].classList.add('show');
             }
 
             function autoShowSlides() {
@@ -161,7 +161,6 @@
                 for (let i = 0; i < slides.length; i++) {
                     slides[i].style.display = "none";
                     slides[i].classList.remove('show');
-
                 }
                 slideIndex++;
                 if (slideIndex > slides.length) {
@@ -169,13 +168,14 @@
                     loadFeedback(); // Reload feedback at the end of the slideshow
                 }
                 slides[slideIndex - 1].style.display = "block";
-                slides[slideIndex - 1].classList.remove('show');
-
-                setTimeout(autoShowSlides, 7000); // Change image every 6 seconds
+                slides[slideIndex - 1].classList.add('show');
+                setTimeout(autoShowSlides, 7000); // Change image every 7 seconds
             }
 
             loadFeedback();
         });
+
+
     </script>
 </body>
 </html>
