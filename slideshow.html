@@ -28,6 +28,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
         }
 
         .mySlides {
@@ -36,11 +37,12 @@
             height: 100%;
             transition: opacity 1s ease-in-out; /* Smooth transition */
             opacity: 0; /* Start with hidden */
+            position: relative;
         }
 
             .mySlides img {
                 width: 100%;
-                height: 100%;
+                height: 80%;
                 object-fit: cover;
                 border-radius: 10px;
             }
@@ -48,6 +50,18 @@
             .mySlides.show {
                 opacity: 1; /* Show slide */
             }
+
+        .caption {
+            position: absolute;
+            bottom: 10px;
+            left: 20px;
+            right: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
 
         .prev, .next {
             cursor: pointer;
@@ -96,7 +110,11 @@
                     }
                     const feedbackList = await response.json();
 
-                    slideshowContainer.innerHTML = feedbackList.map(fb => fb.imageUrl ? `<div class="mySlides"><img src="${fb.imageUrl}" alt="Feedback Image"></div>` : '').join('');
+                    slideshowContainer.innerHTML = feedbackList.map(fb => fb.imageUrl ? `
+                <div class="mySlides">
+                    <img src="${fb.imageUrl}" alt="Feedback Image">
+                    <div class="caption">${fb.feedback || ''}</div>
+                </div>` : '').join('');
                     shuffleSlides();
                     showSlides(slideIndex);
                     autoShowSlides();
@@ -129,8 +147,12 @@
                 if (n < 0) { slideIndex = slides.length - 1; }
                 for (i = 0; i < slides.length; i++) {
                     slides[i].style.display = "none";
+                    slides[i].classList.remove('show');
+
                 }
                 slides[slideIndex].style.display = "block";
+                slides[slideIndex].classList.remove('show');
+
             }
 
             function autoShowSlides() {
@@ -138,6 +160,8 @@
                 if (slides.length === 0) return;
                 for (let i = 0; i < slides.length; i++) {
                     slides[i].style.display = "none";
+                    slides[i].classList.remove('show');
+
                 }
                 slideIndex++;
                 if (slideIndex > slides.length) {
@@ -145,6 +169,8 @@
                     loadFeedback(); // Reload feedback at the end of the slideshow
                 }
                 slides[slideIndex - 1].style.display = "block";
+                slides[slideIndex - 1].classList.remove('show');
+
                 setTimeout(autoShowSlides, 7000); // Change image every 6 seconds
             }
 
