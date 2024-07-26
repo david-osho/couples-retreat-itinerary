@@ -8,24 +8,15 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            background-color: black;
             margin: 0;
             padding: 0;
         }
-            body::before {
-                content: "";
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-image: url('https://raw.githubusercontent.com/david-osho/couples-retreat-itinerary/main/images/aslancr24event.jpeg');
-                background-repeat: no-repeat;
-                background-position: center;
-                background-size: cover;
-                opacity: 0.5;
-                z-index: -1;
-            }
+
+        h1, h2, h3 {
+            text-align: center;
+            color: #4CAF50;
+        }
 
         .slideshow-container {
             max-width: 800px;
@@ -76,7 +67,11 @@
     <div class="slideshow-container" id="slideshow-container"></div>
     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
     <a class="next" onclick="plusSlides(1)">&#10095;</a>
-    <script>document.addEventListener('DOMContentLoaded', () => {
+    <div>
+        <h1>ASLAN LIFE CR24 SLIDE SHOW</h1>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
             const slideshowContainer = document.getElementById('slideshow-container');
             const functionUrl = 'https://aslannew.azurewebsites.net/api/FeedbackFunction?code=WzXTRTdNHHzNUv9NriDbnn3PJlhe81NZ7MRyY32g3qWCAzFuTGDNOQ%3D%3D'; // Update this with the correct URL
 
@@ -89,6 +84,7 @@
                     const feedbackList = await response.json();
 
                     slideshowContainer.innerHTML = feedbackList.map(fb => fb.imageUrl ? `<div class="mySlides"><img src="${fb.imageUrl}" alt="Feedback Image"></div>` : '').join('');
+                    shuffleSlides();
                     showSlides(slideIndex);
                     autoShowSlides();
                 } catch (error) {
@@ -96,9 +92,18 @@
                 }
             }
 
-            loadFeedback();
+            function shuffleSlides() {
+                const slides = Array.from(document.getElementsByClassName("mySlides"));
+                for (let i = slides.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [slides[i], slides[j]] = [slides[j], slides[i]];
+                }
+                slideshowContainer.innerHTML = '';
+                slides.forEach(slide => slideshowContainer.appendChild(slide));
+            }
 
             let slideIndex = 0;
+
             function plusSlides(n) {
                 showSlides(slideIndex += n);
             }
@@ -122,10 +127,16 @@
                     slides[i].style.display = "none";
                 }
                 slideIndex++;
-                if (slideIndex > slides.length) { slideIndex = 1; }
+                if (slideIndex > slides.length) {
+                    slideIndex = 1;
+                    loadFeedback(); // Reload feedback at the end of the slideshow
+                }
                 slides[slideIndex - 1].style.display = "block";
-                setTimeout(autoShowSlides, 6000); // Change image every 10 seconds
+                setTimeout(autoShowSlides, 5000); // Change image every 6 seconds
             }
-        });</script>
+
+            loadFeedback();
+        });
+    </script>
 </body>
 </html>
