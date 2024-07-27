@@ -251,11 +251,11 @@
                 }
                 slides[slideIndex].style.display = "block";
                 slides[slideIndex].classList.add('show');
-                autoSlideTimeout = setTimeout(autoShowSlides, 15000); // Change image every 15 seconds
+                autoSlideTimeout = setTimeout(autoShowSlides, 8000); // Change image every 15 seconds
             }
 
             loadFeedback().then(() => {
-                autoSlideTimeout = setTimeout(autoShowSlides, 15000); // Start the slideshow after initial load
+                autoSlideTimeout = setTimeout(autoShowSlides, 8000); // Start the slideshow after initial load
             });
         });
 
