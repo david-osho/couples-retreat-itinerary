@@ -200,7 +200,6 @@
                 </div>` : '').join('');
                     shuffleSlides();
                     showSlides(slideIndex);
-                    autoShowSlides();
                 } catch (error) {
                     console.error('Fetch error: ', error);
                 }
@@ -217,18 +216,20 @@
             }
 
             let slideIndex = 0;
+            let autoSlideTimeout;
 
             function plusSlides(n) {
+                clearTimeout(autoSlideTimeout); // Reset the auto slide timer on manual navigation
                 showSlides(slideIndex += n);
+                autoSlideTimeout = setTimeout(autoShowSlides, 15000);
             }
 
             function showSlides(n) {
-                let i;
                 let slides = document.getElementsByClassName("mySlides");
                 if (slides.length === 0) return;
                 if (n >= slides.length) { slideIndex = 0; }
                 if (n < 0) { slideIndex = slides.length - 1; }
-                for (i = 0; i < slides.length; i++) {
+                for (let i = 0; i < slides.length; i++) {
                     slides[i].style.display = "none";
                     slides[i].classList.remove('show');
                 }
@@ -244,17 +245,20 @@
                     slides[i].classList.remove('show');
                 }
                 slideIndex++;
-                if (slideIndex > slides.length) {
-                    slideIndex = 1;
+                if (slideIndex >= slides.length) {
+                    slideIndex = 0;
                     loadFeedback(); // Reload feedback at the end of the slideshow
                 }
-                slides[slideIndex - 1].style.display = "block";
-                slides[slideIndex - 1].classList.add('show');
-                setTimeout(autoShowSlides, 15000); // Change image every 7 seconds
+                slides[slideIndex].style.display = "block";
+                slides[slideIndex].classList.add('show');
+                autoSlideTimeout = setTimeout(autoShowSlides, 15000); // Change image every 15 seconds
             }
 
-            loadFeedback();
+            loadFeedback().then(() => {
+                autoSlideTimeout = setTimeout(autoShowSlides, 15000); // Start the slideshow after initial load
+            });
         });
+
 
     </script>
 </body>
