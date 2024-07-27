@@ -186,9 +186,12 @@
                     }
                     const feedbackList = await response.json();
 
-                    // Remove duplicate feedback based on feedback text
-                    const uniqueFeedbackList = Array.from(new Set(feedbackList.map(fb => fb.feedback)))
-                        .map(feedback => feedbackList.find(fb => fb.feedback === feedback));
+                    // Remove duplicate feedback based on feedback text and timestamp
+                    const uniqueFeedbackList = feedbackList.filter((fb, index, self) => {
+                        return index === self.findIndex((t) => (
+                            t.feedback === fb.feedback && Math.abs(new Date(t.timestamp) - new Date(fb.timestamp)) < 5000
+                        ));
+                    });
 
                     slideshowContainer.innerHTML = uniqueFeedbackList.map(fb => fb.imageUrl ? `
                 <div class="mySlides">
