@@ -1,8 +1,9 @@
-Q: How many items are in your gift box?A: 6|A: 7|A: 8*|A: 9
-Q: What's the oil in the gift box for?A: Cooking|A: Massage*|A: Fuel|A: Anointing
-Q: Which scripture is in your gift box?A: Matthew 19:6|A: 1 Corinthians 13:4-7|A: Song of Solomon 8:7|A: Other*
-Q: What Movie are we watching on Friday night?A: The Wedding Party|A: The Notebook|A: The Vow|A:Fireproof*
-Q: What does Proverbs 11:14 say is essential for success?A: Money|A: Wisdom|A: Many advisers*|A: Power
-Q: According to Ecclesiastes 4:11, what is one of the benefits of having a spouse?A: They can help you find your lost socks|A: They will keep you warm when you lie down together*|A: They will remind you to take out the trash|A: They will always laugh at your jokes, even the bad ones.
-Q: According to Colossians 3:19, how are husbands instructed to treat their wives?A: Love them and never be harsh with them*|A: With fear and trembling|A: Spoil them with gifts and luxuries|A: Allow them to make all the important decisions
-Q: How many Couples registered for this years retreat?A: 25-30|A: 30-35|A: 35-40|A: 40-45*|A: 45-50
+Q: How much did Caleb pay for the medidcal equipment for Catherine's mum?A: $300|A: $24,000*|A: $5 per month|A: Still thinking about it
+Q: What significant challenge does Caleb's father introduce to him to save his marriage?A: The Love Dare*|A: Couples Therapy|A: A romantic getaway|A: Marriage counseling
+Q: Why does Catherine initially want a divorce from Caleb?A: Caleb's addiction to internet pornography and neglect of home responsibilities*|A: Caleb's long work hours and lack of communication|A: Caleb's affair with a co-worker|A: Financial disagreements
+Q: How does Caleb demonstrate his commitment to the Love Dare and his marriage?A: He buys Catherine flowers every day|A: He destroys his computer to eliminate his pornography addiction*|A: He stops working as a fire captain|A: He takes Catherine on a vacation
+Q: According to 1 Corinthians 13:5, how does the Bible describe true love?A: It keeps no record of wrongs*|A: It demands love in return|A: It expects a reward|A: It is easily angered
+Q: Which Bible verse encourages believers to look out for the interests of others, similar to Caleb's actions?A: Philippians 2:4*|A: Galatians 5:14|A: Matthew 6:33|A: Romans 12:12
+Q: According to Matthew 6:14-15, what is the importance of forgiveness in the Bible?A: It shows weakness|A: It is optional|A: It is necessary for receiving God's forgiveness*|A: It is only for serious offenses
+Q: According to Proverbs 27:17, what is the benefit of having supportive friends?A: They solve all your problems|A: They provide financial support|A: They sharpen one another, like iron sharpens iron*|A: They are always agreeable
+
