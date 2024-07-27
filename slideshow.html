@@ -17,6 +17,13 @@
             height: 100vh;
         }
 
+        h1, h2, h3 {
+            text-align: center;
+            color: #4CAF50;
+        }
+
+
+
         .slideshow-container {
             width: 80%; /* 80% of the page width */
             height: 80%; /* 80% of the page height */
@@ -61,6 +68,7 @@
             padding: 10px;
             border-radius: 5px;
             text-align: center;
+            font-size: 1.5em;
         }
 
         .prev, .next {
@@ -96,8 +104,8 @@
     <div class="slideshow-container" id="slideshow-container"></div>
     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
     <a class="next" onclick="plusSlides(1)">&#10095;</a>
-    <div>
-        <h1>ASLAN LIFE CR24 SLIDE SHOW</h1>
+    <div class="head">
+        <h1>ASLAN LIFE CR24</h1>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
