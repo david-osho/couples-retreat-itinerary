@@ -24,6 +24,13 @@
             margin-bottom: 20px;
         }
 
+
+        h1, h2, h3 {
+            text-align: center;
+            color: #4CAF50;
+        }
+
+
         .header-title {
             font-size: 2em;
             margin: 0;
@@ -76,6 +83,7 @@
             padding: 10px;
             border-radius: 5px;
             text-align: center;
+            font-size: 1.7em;
         }
 
         .prev, .next {
@@ -106,7 +114,7 @@
 </head>
 <body>
     <header>
-        <h1>ASLAN LIFE CR24</h1>
+        <h1>ASLAN LIFE CR24 SLIDESHOW</h1>
     </header>
     <div class="slideshow-container" id="slideshow-container"></div>
     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -124,11 +132,15 @@
                     }
                     const feedbackList = await response.json();
 
-                    slideshowContainer.innerHTML = feedbackList.map(fb => fb.imageUrl ? `
-                    <div class="mySlides">
-                        <img src="${fb.imageUrl}" alt="Feedback Image">
-                        <div class="caption">${fb.feedback || ''}</div>
-                    </div>` : '').join('');
+                    // Remove duplicate feedback based on feedback text
+                    const uniqueFeedbackList = Array.from(new Set(feedbackList.map(fb => fb.feedback)))
+                        .map(feedback => feedbackList.find(fb => fb.feedback === feedback));
+
+                    slideshowContainer.innerHTML = uniqueFeedbackList.map(fb => fb.imageUrl ? `
+                <div class="mySlides">
+                    <img src="${fb.imageUrl}" alt="Feedback Image">
+                    <div class="caption">${fb.feedback || ''}</div>
+                </div>` : '').join('');
                     shuffleSlides();
                     showSlides(slideIndex);
                     autoShowSlides();
@@ -186,7 +198,6 @@
 
             loadFeedback();
         });
-
 
     </script>
 </body>
