@@ -351,8 +351,8 @@
     <div class="feedback-container">
         <form id="feedbackForm">
             <h1>Fun Memories of the way we were!</h1>
-            <textarea id="feedback" name="feedback" placeholder="Enter a caption and upload a picture of the way we were"></textarea>
-            <input type="file" id="image" name="image" accept="image/*">
+            <textarea id="feedback" name="feedback" placeholder="Enter a caption and upload a picture or video"></textarea>
+            <input type="file" id="media" name="image" accept="image/*,video/*">
             <button type="submit">Submit</button>
         </form>
         <div id="feedbackMessages"></div>
@@ -364,7 +364,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             const feedbackForm = document.getElementById('feedbackForm');
             const feedbackTextarea = document.getElementById('feedback');
-            const imageInput = document.getElementById('image');
+            const mediaInput = document.getElementById('media');
             const feedbackMessages = document.getElementById('feedbackMessages');
             const slideshowContainer = document.getElementById('slideshow-container');
 
@@ -375,13 +375,13 @@
                 console.log('Form submit event triggered'); // Debug log
 
                 const feedback = feedbackTextarea.value;
-                const imageFile = imageInput.files[0];
+                const mediaFile = mediaInput.files[0];
 
-                if (imageFile) {
+                if (mediaFile) {
                     const reader = new FileReader();
                     reader.onload = async function (event) {
-                        const imageBase64 = event.target.result.split(',')[1];
-                        const mimeType = imageFile.type;  // Get the MIME type of the image
+                        const mediaBase64 = event.target.result.split(',')[1];
+                        const mimeType = mediaFile.type;  // Get the MIME type of the media
 
                         console.log('Sending data to server'); // Debug log
                         try {
@@ -390,7 +390,7 @@
                                 headers: {
                                     'Content-Type': 'application/json'
                                 },
-                                body: JSON.stringify({ feedback, image: imageBase64, mimeType })
+                                body: JSON.stringify({ feedback, media: mediaBase64, mimeType })
                             });
 
                             if (!response.ok) {
@@ -401,22 +401,22 @@
                             console.log('Server response:', result); // Debug log
 
                             feedbackTextarea.value = '';
-                            imageInput.value = '';
+                            mediaInput.value = '';
                             loadFeedback();
                         } catch (error) {
                             console.error('Fetch error: ', error); // Debug log
                         }
                     };
-                    reader.readAsDataURL(imageFile);
+                    reader.readAsDataURL(mediaFile);
                 } else {
-                    console.error('No image file selected'); // Debug log
+                    console.error('No media file selected'); // Debug log
                     try {
                         const response = await fetch(functionUrl, {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'
                             },
-                            body: JSON.stringify({ feedback, image: '', mimeType: '' })
+                            body: JSON.stringify({ feedback, media: '', mimeType: '' })
                         });
 
                         if (!response.ok) {
@@ -427,7 +427,7 @@
                         console.log('Server response:', result); // Debug log
 
                         feedbackTextarea.value = '';
-                        imageInput.value = '';
+                        mediaInput.value = '';
                         loadFeedback();
                     } catch (error) {
                         console.error('Fetch error: ', error); // Debug log
@@ -445,17 +445,14 @@
                     const feedbackList = await response.json();
                     console.log('Fetched feedback:', feedbackList); // Debug log
 
-                    // Reverse the feedbackList to show the latest information first
-                    //feedbackList.reverse();
-
                     feedbackMessages.innerHTML = feedbackList.map(fb => `
-                                                <div class="feedback-message">
-                                                    <div class="text">${fb.feedback}</div>
-                                                    ${fb.imageUrl ? `<img src="${fb.imageUrl}" alt="Feedback Image">` : ''}
-                                                    <div class="timestamp">${new Date(fb.timestamp).toLocaleString()}</div>
-                                                </div>`).join('');
+                <div class="feedback-message">
+                    <div class="text">${fb.feedback}</div>
+                    ${fb.mediaUrl ? (fb.mimeType.startsWith('image/') ? `<img src="${fb.mediaUrl}" alt="Feedback Image">` : `<video controls src="${fb.mediaUrl}"></video>`) : ''}
+                    <div class="timestamp">${new Date(fb.timestamp).toLocaleString()}</div>
+                </div>`).join('');
 
-                    slideshowContainer.innerHTML = feedbackList.map(fb => fb.imageUrl ? `<div class="mySlides"><img src="${fb.imageUrl}" alt="Feedback Image"></div>` : '').join('');
+                    slideshowContainer.innerHTML = feedbackList.map(fb => fb.mediaUrl ? (fb.mimeType.startsWith('image/') ? `<div class="mySlides"><img src="${fb.mediaUrl}" alt="Feedback Image"></div>` : `<div class="mySlides"><video controls src="${fb.mediaUrl}"></video></div>`) : '').join('');
                     showSlides(slideIndex);
                     autoShowSlides();
                 } catch (error) {
