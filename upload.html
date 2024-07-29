@@ -381,7 +381,7 @@
                 if (mediaFile) {
                     const reader = new FileReader();
                     reader.onload = async function (event) {
-                        const mediaBase64 = event.target.result.split(',')[1];
+                        const fileBase64 = event.target.result.split(',')[1];
                         const mimeType = mediaFile.type;  // Get the MIME type of the media
 
                         console.log('Sending data to server'); // Debug log
@@ -391,7 +391,7 @@
                                 headers: {
                                     'Content-Type': 'application/json'
                                 },
-                                body: JSON.stringify({ feedback, file: mediaBase64, mimeType })
+                                body: JSON.stringify({ feedback, file: fileBase64, mimeType })
                             });
 
                             if (!response.ok) {
