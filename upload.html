@@ -448,11 +448,11 @@
                     feedbackMessages.innerHTML = feedbackList.map(fb => `
                 <div class="feedback-message">
                     <div class="text">${fb.feedback}</div>
-                    ${fb.fileUrl ? (fb.mimeType.startsWith('image/') ? `<img src="${fb.fileUrl}" alt="Feedback Image">` : `<video controls src="${fb.fileUrl}"></video>`) : ''}
+                    ${fb.imageUrl ? (fb.mimeType.startsWith('image/') ? `<img src="${fb.imageUrl}" alt="Feedback Image">` : `<video controls src="${fb.imageUrl}"></video>`) : ''}
                     <div class="timestamp">${new Date(fb.timestamp).toLocaleString()}</div>
                 </div>`).join('');
 
-                    slideshowContainer.innerHTML = feedbackList.map(fb => fb.fileUrl ? (fb.mimeType.startsWith('image/') ? `<div class="mySlides"><img src="${fb.fileUrl}" alt="Feedback Image"></div>` : `<div class="mySlides"><video controls src="${fb.fileUrl}"></video></div>`) : '').join('');
+                    slideshowContainer.innerHTML = feedbackList.map(fb => fb.imageUrl ? (fb.mimeType.startsWith('image/') ? `<div class="mySlides"><img src="${fb.imageUrl}" alt="Feedback Image"></div>` : `<div class="mySlides"><video controls src="${fb.imageUrl}"></video></div>`) : '').join('');
                     showSlides(slideIndex);
                     autoShowSlides();
                 } catch (error) {
