@@ -390,7 +390,7 @@
                                 headers: {
                                     'Content-Type': 'application/json'
                                 },
-                                body: JSON.stringify({ feedback, media: mediaBase64, mimeType })
+                                body: JSON.stringify({ feedback, file: mediaBase64, mimeType })
                             });
 
                             if (!response.ok) {
@@ -448,11 +448,11 @@
                     feedbackMessages.innerHTML = feedbackList.map(fb => `
                 <div class="feedback-message">
                     <div class="text">${fb.feedback}</div>
-                    ${fb.mediaUrl ? (fb.mimeType.startsWith('image/') ? `<img src="${fb.mediaUrl}" alt="Feedback Image">` : `<video controls src="${fb.mediaUrl}"></video>`) : ''}
+                    ${fb.fileUrl ? (fb.mimeType.startsWith('image/') ? `<img src="${fb.fileUrl}" alt="Feedback Image">` : `<video controls src="${fb.fileUrl}"></video>`) : ''}
                     <div class="timestamp">${new Date(fb.timestamp).toLocaleString()}</div>
                 </div>`).join('');
 
-                    slideshowContainer.innerHTML = feedbackList.map(fb => fb.mediaUrl ? (fb.mimeType.startsWith('image/') ? `<div class="mySlides"><img src="${fb.mediaUrl}" alt="Feedback Image"></div>` : `<div class="mySlides"><video controls src="${fb.mediaUrl}"></video></div>`) : '').join('');
+                    slideshowContainer.innerHTML = feedbackList.map(fb => fb.mediaUrl ? (fb.mimeType.startsWith('image/') ? `<div class="mySlides"><img src="${fb.fileUrl}" alt="Feedback Image"></div>` : `<div class="mySlides"><video controls src="${fb.fileUrl}"></video></div>`) : '').join('');
                     showSlides(slideIndex);
                     autoShowSlides();
                 } catch (error) {
