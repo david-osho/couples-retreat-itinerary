@@ -391,7 +391,7 @@
                                 headers: {
                                     'Content-Type': 'application/json'
                                 },
-                                body: JSON.stringify({ feedback, file: fileBase64, mimeType })
+                                body: JSON.stringify({ feedback, image: fileBase64, mimeType })
                             });
 
                             if (!response.ok) {
@@ -417,7 +417,7 @@
                             headers: {
                                 'Content-Type': 'application/json'
                             },
-                            body: JSON.stringify({ feedback, media: '', mimeType: '' })
+                            body: JSON.stringify({ feedback, image: '', mimeType: '' })
                         });
 
                         if (!response.ok) {
